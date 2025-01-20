@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    gap: 20px;
+}
+.Title{
+    margin-left: 100px;
+    color:white;
+    padding-left: 10px;
+}
+.navbar-text{
+    color: white;
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+}
+.navbar-search{
+position: relative;
+margin-left: 24rem;
+margin-top: 10px;
+color: white;
+}
