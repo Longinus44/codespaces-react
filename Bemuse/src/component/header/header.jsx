@@ -1,30 +1,59 @@
-import React from "react";
-import { Search, SearchOutlined } from "@mui/icons-material";
+import React, { useState } from "react";
+import { Search, } from "@mui/icons-material";
+import MenuIcon from '@mui/icons-material/Menu';
 import './header.css'
-import { Typography } from "@mui/material";
+import { AppBar, Toolbar, Stack, Typography, Button, Menu, MenuItem, IconButton, MenuList } from "@mui/material";
 
-const Header =()=>{
-    return(
-        <div className="container" style={{backgroundColor:'crimson'}}>
-            <div className="Title" >
-            <Typography variant="h5">
-    The <br /> BEM
-  </Typography>
-            </div>
-            <div className="navbar-text">
-                <h3>visit</h3>
-                <h3>Exhibition and Event</h3>
-                <h3>Art</h3>
-                <h3>Learn with Us</h3>
-                <h3>Research</h3>
-                <h3>Shop</h3>
-            </div>
-            <div className="navbar-search">
-            <h3><Search /> Search</h3> 
 
-            </div>
-        </div>
+const Header = () => {
+    const [AnchorNav, SetAnchorNav] = useState(null)
+    const openMenu = (event) => {
+        SetAnchorNav(event.currentTarget)
+    }
+
+    const closeMenu = () => {
+        SetAnchorNav(null)
+    }
+
+    const menudata = ['Visit', 'Exhibition and event', 'Learn with us', 'Research', 'Art', 'Shop']
+
+    return (
+        <AppBar position='static'>
+            <Toolbar>
+                <Typography sx={{ flexGrow: 1 }}>
+                    THE BEM
+                </Typography>
+
+                <Stack direction='row' sx={{ display: { xs: 'none', md: 'flex' } }} >
+                    {menudata.map((navtext, index) => (
+                        <Button color="inherit" key={index}>{navtext}</Button>
+                    ))}
+
+                    <Button color="inherit" startIcon={<Search />} >search</Button>
+
+                </Stack>
+
+                <Stack sx={{ display: { xs: 'flex', md: 'none' } }} >
+                    <IconButton size="large" color="inherit" onClick={openMenu}>
+                        <MenuIcon />
+                    </IconButton>
+                    <div sx={{ justifyContent: 'center', width: '100%' }}>
+                        <Menu open={Boolean(AnchorNav)} onClose={closeMenu} sx={{ display: { xs: 'flex', md: 'none' } }} >
+                            <MenuList >
+                                {menudata.map((navtext, index) => (
+                                    <MenuItem color='inherit' key={index} >{navtext} </MenuItem>
+                                ))}
+                                <MenuItem color='inherit' startIcon={<Search />}> Search</MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </div>
+                </Stack>
+
+            </Toolbar>
+
+        </AppBar>
     )
 }
 
-export default Header
+
+export default Header;
